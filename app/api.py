@@ -17,5 +17,6 @@ async def downloader(url: str):
         "forceurl": True,
         }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(url, download=False)
-    return {json.dumps(ydl.sanitize_info(info))}
+        info = ydl.extract_info(url, download=False, process=True)
+        print(info['url'])
+        return {"url":info['url']}
