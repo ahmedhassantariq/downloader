@@ -11,10 +11,11 @@ async def hello():
 
 @app.get("/api/getVideoInfo/",)
 async def downloader(url: str):
-    ydl_opts = {}
-    decoded_url = unquote(url)
-
-    print(decoded_url)
+    ydl_opts = {
+        "quiet":    True,
+        "simulate": True,
+        "forceurl": True,
+        }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(decoded_url, download=False)
+        info = ydl.extract_info(url, download=False)
     return {json.dumps(ydl.sanitize_info(info))}
