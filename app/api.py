@@ -5,8 +5,11 @@ from urllib.parse import unquote
 
 app = FastAPI()
 
+@app.get("/", tags=["Root"])
+async def hello():
+    return {"message":"Hello. How are you?"}
 
-@app.get("/api/getVideoInfo/")
+@app.get("/api/getVideoInfo/",)
 async def downloader(url: str):
     ydl_opts = {}
     decoded_url = unquote(url)
